@@ -10,27 +10,19 @@ warnings.filterwarnings("ignore", message="Unverified HTTPS request")
 
 @task
 def send_message(text):
-    if not TELEGRAM_API_URL or not CHAT_ID:
-        print("⚠️ Telegram credentials missing. Message not sent.")
-        return
-
+    logger = get_run_logger()
     url = f"{TELEGRAM_API_URL}/sendMessage"
-    data = {"chat_id": CHAT_ID, "text": text}
-    response = requests.post(url, data=data, verify=False)
-    print("Telegram response:", response.status_code, response.text)
+    payload = {"chat_id": CHAT_ID, "text": text}
+    try:
+        requests.post(url, data=payload, verify=False)
+        logger.info("Sent Telegram message")
+    except Exception as e:
+        logger.error(f"Failed to send message: {e}")
 
 @task
 def send_photo(photo_path, caption=""):
-    if not TELEGRAM_API_URL or not CHAT_ID:
-        print("⚠️ Telegram credentials missing. Photo not sent.")
-        return
-
-    full_path = os.path.abspath(photo_path)
-    if not os.path.exists(full_path):
-        print("⚠️ Photo file not found:", full_path)
-        return
-
     url = f"{TELEGRAM_API_URL}/sendPhoto"
+    full_path = os.path.abspath(photo_path)
     with open(full_path, 'rb') as photo:
         files = {"photo": photo}
         data = {"chat_id": CHAT_ID, "caption": caption}
