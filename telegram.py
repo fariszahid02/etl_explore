@@ -4,7 +4,6 @@ import requests
 import warnings
 from config import TELEGRAM_API_URL, CHAT_ID
 from prefect import task, get_run_logger
-import os
 
 warnings.filterwarnings("ignore", message="Unverified HTTPS request")
 
@@ -21,10 +20,13 @@ def send_message(text):
 
 @task
 def send_photo(photo_path, caption=""):
+    logger = get_run_logger()
     url = f"{TELEGRAM_API_URL}/sendPhoto"
-    full_path = os.path.abspath(photo_path)
-    with open(full_path, 'rb') as photo:
-        files = {"photo": photo}
-        data = {"chat_id": CHAT_ID, "caption": caption}
-        response = requests.post(url, data=data, files=files, verify=False)
-        print("Telegram response:", response.status_code, response.text)
+    try:
+        with open(photo_path, 'rb') as photo:
+            files = {"photo": photo}
+            data = {"chat_id": CHAT_ID, "caption": caption}
+            requests.post(url, data=data, files=files, verify=False)
+        logger.info(f"Sent Telegram photo {photo_path}")
+    except Exception as e:
+        logger.error(f"Failed to send photo: {e}")
