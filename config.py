@@ -1,6 +1,9 @@
 # Stores URLs, folder paths, constants
 
 import os
+from dotenv import load_dotenv
+
+load_dotenv()
 
 # URLs
 FILES_INFO = {
@@ -19,9 +22,9 @@ COMPLETE_DONOR_PATH = os.path.join(FOLDER, "complete_donor.parquet")
 DAILY_DONOR_PATH = os.path.join(FOLDER, "daily_donor.parquet")
 
 # Database
-DB_PATH = "donations.duckdb"
+DB_PATH = os.getenv("DB_PATH", "donations.duckdb")
 
 # Telegram
-TELEGRAM_TOKEN = "8529466463:AAF1hXVxKM__Si3a5nEduYro7oiPOedA7Sc"
-CHAT_ID = "7952404275"
+TELEGRAM_TOKEN = os.getenv("TELEGRAM_TOKEN")
+CHAT_ID = os.getenv("CHAT_ID")
 TELEGRAM_API_URL = f"https://api.telegram.org/bot{TELEGRAM_TOKEN}"
