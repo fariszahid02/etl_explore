@@ -1,2 +1,4 @@
 donations.duckdb
 venv
+__pycache__
+downloaded_parquet
