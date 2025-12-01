@@ -21,6 +21,7 @@ DAILY_DONOR_PATH = os.path.join(FOLDER, "daily_donor.parquet")
 # Database
 DB_PATH = "donations.duckdb"
 
-# # Telegram
-# TELEGRAM_TOKEN = "YOUR_TELEGRAM_BOT_TOKEN"
-# CHAT_ID = "YOUR_CHAT_ID"
+# Telegram
+TELEGRAM_TOKEN = "8529466463:AAF1hXVxKM__Si3a5nEduYro7oiPOedA7Sc"
+CHAT_ID = "7952404275"
+TELEGRAM_API_URL = f"https://api.telegram.org/bot{TELEGRAM_TOKEN}"
