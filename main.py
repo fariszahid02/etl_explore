@@ -4,11 +4,14 @@ from load import load_to_duckdb, save_complete_donor, load_other_tables, load_la
 from transform import incremental_update
 from visualization import generate_donation_trend
 from telegram import send_message, send_photo
+import os
 
 @flow(name="donation-etl-pipeline")
 def run_pipeline():
     logger = get_run_logger()
     logger.info("🚀 Starting ETL pipeline")
+    logger.info(f"TELEGRAM_TOKEN loaded: {bool(os.getenv('TELEGRAM_TOKEN'))}")
+    logger.info(f"CHAT_ID loaded: {bool(os.getenv('CHAT_ID'))}")
 
     # Extract
     extract_static_files()

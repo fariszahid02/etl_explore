@@ -13,8 +13,8 @@ def send_message(text):
     url = f"{TELEGRAM_API_URL}/sendMessage"
     payload = {"chat_id": CHAT_ID, "text": text}
     try:
-        requests.post(url, data=payload, verify=False)
-        logger.info("Sent Telegram message")
+        response = requests.post(url, data=payload, verify=False)
+        logger.info(f"Telegram message response: {response.status_code} {response.text}")
     except Exception as e:
         logger.error(f"Failed to send message: {e}")
 
@@ -26,7 +26,7 @@ def send_photo(photo_path, caption=""):
         with open(photo_path, 'rb') as photo:
             files = {"photo": photo}
             data = {"chat_id": CHAT_ID, "caption": caption}
-            requests.post(url, data=data, files=files, verify=False)
-        logger.info(f"Sent Telegram photo {photo_path}")
+            response = requests.post(url, data=data, files=files, verify=False)
+        logger.info(f"Telegram photo response: {response.status_code} {response.text}")
     except Exception as e:
         logger.error(f"Failed to send photo: {e}")
