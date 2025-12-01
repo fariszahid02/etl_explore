@@ -1,4 +1,5 @@
-# extract.py
+# Handles downloading and fetching data
+
 import os
 import requests
 from config import FILES_INFO, COMPLETE_DONOR_PATH, FOLDER

@@ -1,5 +1,5 @@
+# Orchestrates the ETL process
 
-# main.py
 from extract import extract_static_files
 from load import load_to_duckdb, save_complete_donor, load_other_tables, load_latest_daily_donor
 from transform import incremental_update

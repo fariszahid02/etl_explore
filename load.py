@@ -1,5 +1,5 @@
+# Handles loading data into DuckDB and saving back to Parquet
 
-# load.py
 import duckdb
 import os
 from config import COMPLETE_DONOR_PATH, DB_PATH, FOLDER, BASE_URL

@@ -1,5 +1,5 @@
+# Common helper functions (e.g., get_latest_daily_donor)
 
-# utils.py
 import requests
 from datetime import datetime, timedelta
 

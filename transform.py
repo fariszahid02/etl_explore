@@ -1,5 +1,5 @@
+# Handles data cleaning, merging, incremental updates
 
-# transform.py
 import requests
 from datetime import timedelta, datetime
 from config import BASE_URL, DAILY_DONOR_PATH

@@ -1,4 +1,5 @@
-# config.py
+# Stores URLs, folder paths, constants
+
 import os
 
 # URLs
