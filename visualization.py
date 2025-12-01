@@ -3,8 +3,11 @@
 import matplotlib.pyplot as plt
 import pandas as pd
 from datetime import datetime, timedelta
+from prefect import task, get_run_logger
 
+@task
 def generate_donation_trend(conn):
+    logger = get_run_logger()
     query = """
     SELECT visit_date, COUNT(*) AS donation_count
     FROM complete_donor
@@ -44,4 +47,5 @@ def generate_donation_trend(conn):
     plt.savefig(chart_path)
     plt.close()
 
+    logger.info("Generated donation trend chart")
     return chart_path, insight_msg

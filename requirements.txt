@@ -2,3 +2,5 @@ duckdb
 pandas
 plotly
 requests
+prefect
+matplotlib

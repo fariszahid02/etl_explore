@@ -3,8 +3,11 @@
 import requests
 from datetime import timedelta, datetime
 from config import BASE_URL, DAILY_DONOR_PATH
+from prefect import task, get_run_logger
 
+@task
 def incremental_update(conn, latest_complete_date):
+    logger = get_run_logger()
     start_date = latest_complete_date + timedelta(days=1)
     today = datetime.today().date()
     new_rows_added = 0
@@ -20,11 +23,11 @@ def incremental_update(conn, latest_complete_date):
                 conn.execute(f"INSERT INTO complete_donor SELECT * FROM read_parquet('{DAILY_DONOR_PATH}')")
                 count = conn.execute("SELECT COUNT(*) FROM read_parquet(?)", [DAILY_DONOR_PATH]).fetchone()[0]
                 new_rows_added += count
-                print(f"✅ Added {count} rows for {date_str}")
+                logger.info(f"Added {count} rows for {date_str}")
             else:
-                print(f"❌ No data for {date_str}")
+                logger.warning(f"No data for {date_str}")
         except Exception as e:
-            print(f"❌ Error for {date_str}: {e}")
+            logger.error(f"Error for {date_str}: {e}")
         start_date += timedelta(days=1)
 
     return new_rows_added
