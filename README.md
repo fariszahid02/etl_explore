@@ -46,7 +46,17 @@ All datasets are provided in **Parquet format** and accessed via secure KijangNe
 ---
 
 
-## Current Limitations & Performance Notes
+
+## Future Enhancements
+- Advanced data exploration (Transform) and analytics.
+- Additional visualizations (e.g., blood group distribution, retention trends).
+- Audience-specific dashboards and insights.
+- Integration with BI tools or web dashboards.
+
+---
+
+
+## Current Limitations & Performance Notes (03/12/2025)
 - **Prefect does not persist state between runs**:  
   When the pipeline runs on Prefect Cloud, it does not remember the last updated date for the historical dataset.  
   As a result, each scheduled run reprocesses all incremental updates from the daily donor files, even if the historical file is already up-to-date. This increases runtime unnecessarily.
@@ -59,13 +69,5 @@ All datasets are provided in **Parquet format** and accessed via secure KijangNe
 
 > **Planned improvement**: Implement Prefect task state persistence or external metadata storage (e.g., in DuckDB or a separate state file) to avoid redundant processing.
 
-
----
-
-## Future Enhancements
-- Advanced data exploration (Transform) and analytics.
-- Additional visualizations (e.g., blood group distribution, retention trends).
-- Audience-specific dashboards and insights.
-- Integration with BI tools or web dashboards.
 
 
