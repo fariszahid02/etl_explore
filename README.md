@@ -58,8 +58,7 @@ All datasets are provided in **Parquet format** and accessed via secure KijangNe
 
 ## Current Limitations & Performance Notes (03/12/2025)
 - **Prefect does not persist state between runs**:  
-  When the pipeline runs on Prefect Cloud, it does not remember the last updated date for the historical dataset.  
-  As a result, each scheduled run reprocesses all incremental updates from the daily donor files, even if the historical file is already up-to-date. This increases runtime unnecessarily.
+  When the pipeline runs on Prefect Cloud, it does not remember the last updated date for the historical dataset. As a result, each scheduled run reprocesses all incremental updates from the daily donor files, even if the historical file is already up-to-date. This increases runtime unnecessarily.
 
 - **Local runs are optimized**:  
   When running locally, the pipeline checks the latest date in the historical file and only processes new data.
